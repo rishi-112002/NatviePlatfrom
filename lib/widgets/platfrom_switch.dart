@@ -29,8 +29,16 @@ class PlatformSwitch extends StatelessWidget {
             title,
             style:
                 isIOS
-                    ? const TextStyle(fontWeight: FontWeight.bold)
-                    : Theme.of(context).textTheme.titleMedium,
+                    ? const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: CupertinoColors.black,
+                    )
+                    : Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: CupertinoColors.black,
+                    ),
           ),
           const SizedBox(height: 8.0),
           isIOS
