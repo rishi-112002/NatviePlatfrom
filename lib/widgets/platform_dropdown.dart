@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:native_setup/widgets/platform_text.dart';
 import '../utils/platform_utils.dart';
 
 class PlatformDropdown extends StatefulWidget {
@@ -30,21 +31,7 @@ class PlatformDropdownState extends State<PlatformDropdown> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.title,
-            style:
-                isIOS
-                    ? const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: CupertinoColors.black,
-                    )
-                    : Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: CupertinoColors.black,
-                    ),
-          ),
+          PlatformText(title: widget.title, isIOS: isIOS),
           const SizedBox(height: 8.0),
           isIOS ? _buildCupertinoDropdown() : _buildMaterialDropdown(),
         ],

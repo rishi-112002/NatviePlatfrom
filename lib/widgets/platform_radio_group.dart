@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:native_setup/utils/platform_utils.dart';
+import 'package:native_setup/widgets/platform_text.dart';
 
 class PlatformRadioGroup extends StatelessWidget {
   final String title;
@@ -28,21 +29,7 @@ class PlatformRadioGroup extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style:
-                isIOS
-                    ? const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: CupertinoColors.black,
-                    )
-                    : Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: CupertinoColors.black,
-                    ),
-          ),
+          PlatformText(title: title, isIOS: isIOS),
           const SizedBox(height: 8.0),
           Column(
             children: List<Widget>.generate(labels.length, (int index) {

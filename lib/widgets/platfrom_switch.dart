@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:native_setup/widgets/platform_text.dart';
 import '../utils/platform_utils.dart';
 
 class PlatformSwitch extends StatelessWidget {
@@ -25,21 +26,7 @@ class PlatformSwitch extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style:
-                isIOS
-                    ? const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: CupertinoColors.black,
-                    )
-                    : Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: CupertinoColors.black,
-                    ),
-          ),
+          PlatformText(title: title, isIOS: isIOS),
           const SizedBox(height: 8.0),
           isIOS
               ? CupertinoFormRow(
