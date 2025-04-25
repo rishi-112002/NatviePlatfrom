@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:native_setup/data/dummy_data.dart';
 import 'package:native_setup/utils/platform_utils.dart';
 import 'package:native_setup/widgets/platform_dropdown.dart';
 import 'package:native_setup/widgets/platform_radio_group.dart';
@@ -17,41 +18,10 @@ class PlatformWidgetsDemo extends StatefulWidget {
 }
 
 class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
-  // 1. Text input field
   final TextEditingController _nameController = TextEditingController();
-
-  // 2. Dropdown
   String _selectedCountry = 'India';
-  final List<String> _countries = [
-    'USA',
-    'India',
-    'Australia',
-    'Brazil',
-    'Canada',
-    'Mexico',
-    'United Kingdom',
-    'Germany',
-    'France',
-    'Japan',
-  ];
-
-  // 3. Radio button option
   int _preferredContactMethod = 0;
-  final List<String> _contactMethodLabels = ['Email', 'Phone', 'SMS'];
-
-  // 4. Checkbox options
-  final List<bool> _interestsValues = [false, false, false, false];
-  final List<String> _interestLabels = [
-    'Technology',
-    'Sports',
-    'Music',
-    'Travel',
-  ];
-
-  // 5. Switch
   bool _receiveNewsletter = false;
-
-  // 6. Date & Time pickers
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
 
@@ -64,10 +34,10 @@ class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
   void _resetFormValues() {
     setState(() {
       _nameController.clear();
-      _selectedCountry = _countries[0];
+      _selectedCountry = countries[0];
       _preferredContactMethod = 0;
-      for (int i = 0; i < _interestsValues.length; i++) {
-        _interestsValues[i] = false;
+      for (int i = 0; i < interestsValues.length; i++) {
+        interestsValues[i] = false;
       }
       _receiveNewsletter = false;
       _selectedDate = DateTime.now();
@@ -78,9 +48,9 @@ class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
 
   // Updated handler for the list of checkbox values
   void _handleCheckboxChanged(int index, bool? value) {
-    if (value == null || index < 0 || index >= _interestsValues.length) return;
+    if (value == null || index < 0 || index >= interestsValues.length) return;
     setState(() {
-      _interestsValues[index] = value;
+      interestsValues[index] = value;
     });
   }
 
@@ -88,11 +58,11 @@ class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
     final formData = {
       'name': _nameController.text,
       'country': _selectedCountry,
-      'contactMethod': _contactMethodLabels[_preferredContactMethod],
+      'contactMethod': contactMethodLabels[_preferredContactMethod],
       'interests':
           Map.fromIterables(
-            _interestLabels,
-            _interestsValues,
+            interestLabels,
+            interestsValues,
           ).entries.where((e) => e.value).map((e) => e.key).toList(),
       'newsletter': _receiveNewsletter,
       'appointmentDate': _selectedDate.toIso8601String().split('T')[0],
@@ -147,7 +117,7 @@ class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
         PlatformDropdown(
           title: 'Country',
           value: _selectedCountry,
-          items: _countries,
+          items: countries,
           onChanged: (String newValue) {
             setState(() {
               _selectedCountry = newValue;
@@ -159,7 +129,7 @@ class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
         PlatformRadioGroup(
           title: 'Preferred Contact Method',
           value: _preferredContactMethod,
-          labels: _contactMethodLabels,
+          labels: contactMethodLabels,
           onChanged: (int? value) {
             if (value != null) {
               setState(() {
@@ -172,8 +142,8 @@ class PlatformWidgetsDemoState extends State<PlatformWidgetsDemo> {
         // 4. Checkbox options
         PlatformCheckboxGroup(
           title: 'Interests',
-          values: _interestsValues,
-          labels: _interestLabels,
+          values: interestsValues,
+          labels: interestLabels,
           onChanged: _handleCheckboxChanged,
         ),
 
